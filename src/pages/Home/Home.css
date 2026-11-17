@@ -1,0 +1,146 @@
+.home {
+  width: 100%;
+}
+
+/* Hero Section */
+
+.hero {
+  min-height: 420px;
+  padding: 80px 8%;
+  display: flex;
+  align-items: center;
+  background-color: #f2eee8;
+}
+
+.hero-content {
+  max-width: 600px;
+}
+
+.hero-subtitle {
+  font-size: 13px;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+  color: #777;
+}
+
+.hero h1 {
+  font-size: 48px;
+  line-height: 1.2;
+  margin-bottom: 20px;
+  color: #222;
+}
+
+.hero-content > p:not(.hero-subtitle) {
+  color: #666;
+  line-height: 1.7;
+  margin-bottom: 30px;
+}
+
+.shop-button {
+  display: inline-block;
+  padding: 14px 25px;
+  background-color: #222;
+  color: white;
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+
+.shop-button:hover {
+  background-color: #444;
+}
+
+/* Common Section Styles */
+
+.categories-section,
+.featured-section {
+  padding: 70px 8%;
+}
+
+.section-heading {
+  margin-bottom: 30px;
+}
+
+.section-heading h2 {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.section-heading p {
+  color: #777;
+}
+
+/* Categories */
+
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.category-card {
+  min-height: 160px;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #f5f5f5;
+  color: #222;
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+
+.category-card:hover {
+  background-color: #eae5dd;
+}
+
+.category-card span {
+  font-size: 14px;
+  color: #777;
+}
+
+/* Featured Products */
+
+.featured-placeholder {
+  min-height: 180px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+  background-color: #f7f7f7;
+  color: #777;
+  text-align: center;
+}
+
+.view-all-link {
+  display: inline-block;
+  margin-top: 25px;
+  color: #222;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* Responsive Design */
+
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 36px;
+  }
+
+  .categories-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding: 60px 6%;
+  }
+
+  .hero h1 {
+    font-size: 30px;
+  }
+
+  .categories-grid {
+    grid-template-columns: 1fr;
+  }
+}
