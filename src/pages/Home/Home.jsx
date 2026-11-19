@@ -1,13 +1,47 @@
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+
+import {
+  getCategories,
+  getFeaturedProducts,
+} from '../../services/productService';
+
 import './Home.css';
 
 function Home() {
-  const categories = [
-    'Chairs',
-    'Tables',
-    'Sofas',
-    'Beds',
-  ];
+
+  // State variables
+  const [categories, setCategories] = useState([]);
+  const [loadingCategories, setLoadingCategories] = useState(true);
+  const [categoryError, setCategoryError] = useState(null);
+
+  // Fetch categories from Django
+  useEffect(() => {
+  async function fetchHomeData() {
+    try {
+      // Fetch categories
+      const categoryData = await getCategories();
+      setCategories(categoryData);
+
+      // Fetch featured products
+      const productData = await getFeaturedProducts();
+
+      console.log(
+        'Featured Products:',
+        JSON.stringify(productData, null, 2)
+      );
+
+    } catch (error) {
+      console.error('Failed to fetch home data:', error);
+      setCategoryError('Unable to load home page data.');
+
+    } finally {
+      setLoadingCategories(false);
+    }
+  }
+
+  fetchHomeData();
+}, []);
 
   return (
     <main className="home">
@@ -41,18 +75,24 @@ function Home() {
           <p>Find the perfect furniture for every space.</p>
         </div>
 
-        <div className="categories-grid">
-          {categories.map((category) => (
-            <Link
-              to="/products/"
-              className="category-card"
-              key={category}
-            >
-              <h3>{category}</h3>
-              <span>Explore →</span>
-            </Link>
-          ))}
-        </div>
+        {loadingCategories && <p>Loading categories...</p>}
+
+        {categoryError && <p>{categoryError}</p>}
+
+        {!loadingCategories && !categoryError && (
+          <div className="categories-grid">
+            {categories.map((category) => (
+              <Link
+                to="/products/"
+                className="category-card"
+                key={category.id}
+              >
+                <h3>{category.name}</h3>
+                <span>Explore →</span>
+              </Link>
+            ))}
+          </div>
+        )}
       </section>
 
       {/* Featured Products Section */}
@@ -64,8 +104,7 @@ function Home() {
 
         <div className="featured-placeholder">
           <p>
-            Featured products will appear here once we connect
-            the Django Products API.
+            Featured products will appear here.
           </p>
         </div>
 
